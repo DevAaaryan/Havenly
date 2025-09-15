@@ -58,7 +58,7 @@ body{
 }
 
 /* cards */
-.card{
+.listing-card{
     border: none !important;
     margin-bottom: 2rem;
 }
@@ -120,3 +120,14 @@ body{
     padding-left: 0;
     padding-right: 0;
 }
+
+.light-bluevoilet{
+    background-color: rgb(183, 148, 207) !important;
+}
+
+.bluevoilet{
+    background-color: blueviolet !important;
+    color: white !important;
+}
+
+/* rgb(174, 121, 224) */
