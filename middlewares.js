@@ -26,3 +26,12 @@ module.exports.isOwner = async (req, res, next) => {
     }
     next();
 }
+
+module.exports.validateListing = (req, res, next) => {
+    let { error } = listingSchema.validate(req.body);
+    if (error) {
+        throw new ExpressError(400, error.details[0].message);
+    } else {
+        next();
+    }
+}
