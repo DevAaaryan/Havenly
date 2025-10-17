@@ -16,7 +16,7 @@ body{
 }
 
 .fa-hamsa{
-    color: blueviolet;
+    color: rgb(212, 39, 39);
     font-size: 2rem;
 }
 
@@ -93,7 +93,7 @@ body{
 /* New Page */
 
 .add-btn{
-    background-color: blueviolet !important;
+    background-color: rgb(212, 39, 39) !important;
     border: none !important;
 }
 
@@ -122,11 +122,11 @@ body{
 }
 
 .light-bluevoilet{
-    background-color: rgb(183, 148, 207) !important;
+    background-color: black !important;
 }
 
 .bluevoilet{
-    background-color: blueviolet !important;
+    background-color: rgb(212, 39, 39) !important;
     color: white !important;
 }
 
