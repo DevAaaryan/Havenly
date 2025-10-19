@@ -1,12 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
-const { listingSchema } = require("../schema.js");
-const ExpressError = require("../utils/ExpressError.js");
 const Listing = require("../models/listing");
 const passport = require("passport");
 const { isLoggedIn, isOwner, validateListing } = require("../middlewares.js");
-const listing = require("../models/listing");
 
 
 //Index Route
@@ -32,7 +29,6 @@ router.get("/:id", wrapAsync(async (req, res) => {
         req.flash("error", "Listing does not exist");
         return res.redirect("/listings");
     }
-    console.log(listing);
     res.render("./listings/show.ejs", { listing });
 
 })
