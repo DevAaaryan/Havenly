@@ -5,15 +5,15 @@ const ExpressError = require("../utils/ExpressError.js");
 const Listing = require("../models/listing");
 const Review = require("../models/review.js");
 const { reviewSchema } = require("../schema.js");
-const { validateReview } = require("../middlewares.js");
+const { validateReview, isLoggedIn } = require("../middlewares.js");
 
 
 //Reviews
 //Post Route
-router.post("/", validateReview, wrapAsync(async (req, res) => {
+router.post("/", isLoggedIn, validateReview, wrapAsync(async (req, res) => {
     let listing = await Listing.findById(req.params.id);
     let newReview = new Review(req.body.review);
-
+    newReview.author = req.user._id;
     listing.reviews.push(newReview);
 
     await newReview.save();

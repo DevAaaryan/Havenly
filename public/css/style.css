@@ -131,3 +131,9 @@ body{
 }
 
 /* rgb(174, 121, 224) */
+
+.review{
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
