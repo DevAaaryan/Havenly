@@ -7,10 +7,7 @@ const { isLoggedIn, isOwner, validateListing } = require("../middlewares.js");
 
 
 //Index Route
-router.get("/", validateListing, wrapAsync(async (req, res) => {
-    const allListings = await Listing.find({});
-    res.render("./listings/index.ejs", { allListings });
-})
+router.get("/", validateListing, wrapAsync()
 );
 
 
