@@ -47,3 +47,12 @@ module.exports.deleteListing = async (req, res) => {
     res.redirect("/listings");
 };
 
+module.exports.updateListing = async (req, res) => {
+    let { id } = req.params;
+    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+    req.flash("success", "New Listing Updated!");
+
+    res.redirect(`/listings/${id}`);
+}
+
+

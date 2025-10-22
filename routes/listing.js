@@ -31,13 +31,7 @@ router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.renderE
 );
 
 //Update Route
-router.put("/:id", isLoggedIn, isOwner, validateListing, wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
-    req.flash("success", "New Listing Updated!");
-
-    res.redirect(`/listings/${id}`);
-})
+router.put("/:id", isLoggedIn, isOwner, validateListing, wrapAsync(listingController.updateListing)
 );
 
 
