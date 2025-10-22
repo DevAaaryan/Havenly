@@ -4,17 +4,17 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const Listing = require("../models/listing");
 const passport = require("passport");
 const { isLoggedIn, isOwner, validateListing } = require("../middlewares.js");
+const listingController = require("../controllers/listing");
+
 
 
 //Index Route
-router.get("/", validateListing, wrapAsync()
+router.get("/", validateListing, wrapAsync(listingController.index)
 );
 
 
 //New Route
-router.get("/new", isLoggedIn, wrapAsync(async (req, res) => {
-    res.render("./listings/new.ejs");
-})
+router.get("/new", isLoggedIn, wrapAsync(listingController.renderNewForm)
 );
 
 
