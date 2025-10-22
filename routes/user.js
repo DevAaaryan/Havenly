@@ -4,52 +4,17 @@ const User = require("../models/user");
 const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
 const { saveRedirectUrl } = require("../middlewares");
+const userController = require("../controllers/user");
 
-router.get("/signup", (req, res) => {
-    res.render("users/signup.ejs");
+router.get("/signup", userController.renderSignUpForm);
 
-})
+router.post("/signup", (userController.signUpUser));
 
-router.post("/signup", wrapAsync(async (req, res) => {
-    try {
-        const { username, email, password } = req.body;
-        const newUser = new User({ email, username });
-        const registerUser = await User.register(newUser, password);
-        
-        req.login(registerUser,(err)=>{
-            if(err){
-                return next(err);
-            }
-            req.flash("success", "Welcome to Havenly!");
-            res.redirect("/listings");
-        });
-        
-    } catch (e) {
-        req.flash("error", e.message);
-        res.redirect("/signup");
-    }
+router.get("/login", userController.renderLoginForm);
 
-}));
+router.post("/login",saveRedirectUrl, passport.authenticate("local", { failureRedirect: '/login', failureFlash: true }), (userController.loginUser));
 
-router.get("/login", (req, res) => {
-    res.render("users/login.ejs");
-})
-
-router.post("/login",saveRedirectUrl, passport.authenticate("local", { failureRedirect: '/login', failureFlash: true }), async (req, res) => {
-    req.flash("success", "Welcome Back To Havenly!");
-    let redirectUrl = res.locals.redirectUrl || "/listings";
-    res.redirect(redirectUrl);
-})
-
-router.get("/logout", (req,res)=>{
-    req.logout((err)=>{
-        if(err){
-            return next(err);
-        }
-        req.flash("success", "You are logged out!");
-        res.redirect("/listings");
-    })
-})
+router.get("/logout", (userController.logoutUser));
 
 
 
