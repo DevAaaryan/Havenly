@@ -110,7 +110,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render("err.ejs", { message });
 });
 
-app.listen(8080, () => {
+app.listen(3000, () => {
     console.log("app is listening");
 });
 
