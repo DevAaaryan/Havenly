@@ -1,3 +1,9 @@
+if (process.env.NODE_ENV != "production") {
+    require('dotenv').config()
+}
+
+console.log(process.env.SCRETE)
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -27,7 +33,7 @@ const sessionOption = {
     secret: "mysupersecretcode",
     resave: false,
     saveUninitialized: true,
-    cookie:{
+    cookie: {
         expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
         maxAge: 7 * 24 * 60 * 60 * 1000,
         httpOnly: true,
@@ -57,7 +63,7 @@ async function main() {
 }
 
 
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     res.locals.currentUser = req.user;
@@ -75,7 +81,7 @@ app.use((req,res,next)=>{
 // })
 
 
-app.use("/listings",listingRouter);
+app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter)
 app.use("/", userRouter);
 
