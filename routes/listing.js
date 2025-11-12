@@ -5,6 +5,8 @@ const Listing = require("../models/listing");
 const passport = require("passport");
 const { isLoggedIn, isOwner, validateListing } = require("../middlewares.js");
 const listingController = require("../controllers/listing");
+const multer  = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 
 
@@ -14,8 +16,8 @@ router.route("/")
 // .post(isLoggedIn, wrapAsync(listingController.createListing)
 // );
 
-.post((req,res)=>{
-    res.send(req.body)
+.post(upload.single('listing[image]'),(req,res)=>{
+    res.send(req.file)
 })
 
 
